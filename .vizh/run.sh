@@ -1,16 +1,15 @@
 #!/bin/sh
 #
-# Runs your program. Tests call this script to execute your code.
+# Runs your program using Bun.
 #
-# For TypeScript: Runs the compiled JavaScript from dist/
-#
-# Note: This file is used by Vizh.ai to run your program.
-# Make sure compile.sh has been run first.
-#
-
 set -e
 
 cd "$(dirname "$0")/.."
 
-exec node dist/index.js "$@"
+export CI=true
+export FORCE_COLOR=0
+export NO_COLOR=1
+export BUN_NO_CLEAR_SCREEN=1
 
+# Execute directly with Bun
+exec bun run src/index.ts "$@"
